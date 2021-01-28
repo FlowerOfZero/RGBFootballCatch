@@ -14,13 +14,9 @@ public class Score
         score.HighScore = scoreToSave;
         string path = null;
         string json = JsonUtility.ToJson(score);
-
-
        
         path = Application.dataPath + "/Resources/ScoreData.json";
-       
 
-        
         using (FileStream fs = new FileStream(path, FileMode.Create))
         {
             using (StreamWriter writer = new StreamWriter(fs))
@@ -31,9 +27,6 @@ public class Score
         #if UNITY_EDITOR
         UnityEditor.AssetDatabase.Refresh();
         #endif
-
-        
-        //json = JsonUtility.ToJson(score);
 
         Debug.Log("Saving as JSON:" + json);
     }

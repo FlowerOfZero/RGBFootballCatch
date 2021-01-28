@@ -20,11 +20,9 @@ public class BallShooter : MonoBehaviour
     private int numOfTrajectoryPoints = 30;
     private List<GameObject> trajectoryPoints;
 
-    // Start is called before the first frame update
     void Start()
     {
         UIM = FindObjectOfType<UiManager>();
-        //InvokeRepeating("shootBall", 2f, 3f);
         trajectoryPoints = new List<GameObject>();
 
         for (int i = 0; i < numOfTrajectoryPoints; i++)
@@ -33,7 +31,6 @@ public class BallShooter : MonoBehaviour
             dot.GetComponent<Renderer>().enabled = false;
             trajectoryPoints.Insert(i, dot);
         }
-        //shootBall();
 
         //check to see if the files exist, if they dont create them
         if(!File.Exists(Application.dataPath + "/Resources/RedBall.json"))
@@ -67,6 +64,7 @@ public class BallShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         timer += Time.deltaTime;
 
         if(timeTillNextBall <= timer)
@@ -105,6 +103,7 @@ public class BallShooter : MonoBehaviour
                 break;
         }
 
+        //apply the loaded ball's data to the ball prefab
         GameObject tempObject = Instantiate(ball, instancePoint.transform.position, instancePoint.transform.rotation);
         tempObject.GetComponent<MeshRenderer>().material.color = ballData.color;
         tempObject.GetComponent<Rigidbody>().velocity = ballData.ballVelocity;
@@ -129,6 +128,7 @@ public class BallShooter : MonoBehaviour
             Vector3 pos = new Vector3(2, pStartPosition.y + dy, pStartPosition.z + dz);
             trajectoryPoints[i].transform.position = pos;
 
+            //controls weather the player had selected to see trajectories
             if (showBallTrajectory)
                 trajectoryPoints[i].GetComponent<Renderer>().enabled = true;
             else

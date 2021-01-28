@@ -35,9 +35,9 @@ public class UiManager : MonoBehaviour
     public void Update()
     {
         sprintSlider.value = playerMovement.sprintTimer;
-        
     }
 
+    //main menu methods
     public void playClicked()
     {
         scoreToAdd = 1;
@@ -53,6 +53,7 @@ public class UiManager : MonoBehaviour
         Application.Quit();
     }
 
+    //ball colision manager methods
     public void ballDropped()
     {
         //destroy all current balls in the scene, so the player cant earn points after they drop a ball
